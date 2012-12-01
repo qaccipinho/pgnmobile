@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MobilePGNActivity!</string>
+    <string name="app_name">PGN GIS System</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="login">Login</string>
+    <string name="user_name">User Name</string>
+    <string name="user_hint">User LDAP</string>
+    <string name="password">Password</string>
+    <string name="title_exit_dialog">Konfirmasi Keluar</string>
+    <string name="message_exit_dialog">Anda yakin ingin keluar dari program?</string>
+    <string name="ya">Ya</string>
+    <string name="tidak">Tidak</string>
+    <string name="list_layer_identify">Pipa Gas,Tiang Ukur Katodik,Stasiun Pelanggan,Stasiun Pembagi,Offtake</string>
+    <string name="list_layer_identify_id">44,29,25,24,23</string>
+    <string name="list_layer_identify42">StasiunOfftake,StasiunPelanggan,Pipa</string>
+    <string name="list_layer_identify_id42">0,1,2</string>
+    <string name="list_layer_identify_field42">Name,Name,Diameter</string>
+
+</resources>
