@@ -27,7 +27,7 @@ public class MobilePGNActivity extends Activity {
 	String besmap, opmap;
 
 	public static final String TAG = "MobilePGN-Map";
-	public final double DEFAULT_SCALE = 4508.93552506767 ;
+	public final double DEFAULT_SCALE = 4508.93552506767;
 
     /** Called when the activity is first created. */
     @Override
