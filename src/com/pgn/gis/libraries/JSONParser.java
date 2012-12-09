@@ -76,7 +76,7 @@ public class JSONParser {
 			
 			while((line = bufferedReader.readLine()) != null)
 			{
-				stringBuilder.append(line + "n");
+				stringBuilder.append(line + "\n");
 			}
 			
 			inputStream.close();

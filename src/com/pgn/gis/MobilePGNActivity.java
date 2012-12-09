@@ -1,11 +1,15 @@
 package com.pgn.gis;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
-
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import com.esri.android.map.LocationService;
 import com.esri.android.map.MapView;
 import com.esri.android.map.ags.ArcGISDynamicMapServiceLayer;
@@ -21,13 +25,15 @@ public class MobilePGNActivity extends Activity {
 
 	ArcGISDynamicMapServiceLayer dynamicLayer;
 	ArcGISTiledMapServiceLayer tiledLayer;
+	ImageButton imgCariJalan;
 	MapView mMapView;
 	Point gpsPoint;
 	MyTouchListener myTouchListener;
 	String besmap, opmap;
 
 	public static final String TAG = "MobilePGN-Map";
-	public final double DEFAULT_SCALE = 4508.93552506767;
+	private static final int reqId = 1;
+	public final double DEFAULT_SCALE = 9017.87105013534;
 
     /** Called when the activity is first created. */
     @Override
@@ -36,11 +42,14 @@ public class MobilePGNActivity extends Activity {
         setContentView(R.layout.main_map);
         
         besmap = "http://gis.pgn.co.id/ArcGIS/rest/services/BasemapPGN_Pusat/MapServer";
-        opmap = "http://gis.pgn.co.id/ArcGIS/rest/services/mobile/MapServer";
+        //opmap = "http://gis.pgn.co.id/ArcGIS/rest/services/mobile/MapServer";
+        opmap = "http://gis.pgn.co.id/ArcGIS/rest/services/NetworkPGN/MapServer";
 
 		mMapView = (MapView)findViewById(R.id.peta);
 		mMapView.setScale(DEFAULT_SCALE);
 		
+		imgCariJalan = (ImageButton)findViewById(R.id.imgCariJalan);
+
 		tiledLayer = new ArcGISTiledMapServiceLayer(besmap);
 		dynamicLayer = new ArcGISDynamicMapServiceLayer(opmap);
 
@@ -51,6 +60,13 @@ public class MobilePGNActivity extends Activity {
 			currentLocation();
 			myTouchListener = new MyTouchListener(getApplicationContext(), mMapView, opmap);
 			mMapView.setOnTouchListener(myTouchListener);
+			imgCariJalan.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Log.d(TAG, "Click Image");
+				}
+			});
 		}
 		else {
 			dynamicLayer.setOnStatusChangedListener(new OnStatusChangedListener() {
@@ -63,6 +79,16 @@ public class MobilePGNActivity extends Activity {
 						currentLocation();
 						myTouchListener = new MyTouchListener(getApplicationContext(), mMapView, opmap);
 						mMapView.setOnTouchListener(myTouchListener);
+						
+						imgCariJalan.setOnClickListener(new OnClickListener() {
+							
+							@Override
+							public void onClick(View v) {
+								Log.d(TAG, "Button Cari Jalan Clicked");
+								Intent iCariJalan = new Intent(getApplicationContext(), CariJalanActivity.class);
+								startActivityForResult(iCariJalan, reqId);
+							}
+						});
 					}
 				}
 			});
@@ -126,6 +152,20 @@ public class MobilePGNActivity extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		return super.onKeyDown(keyCode, event);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if (requestCode == reqId) {
+			if (resultCode == RESULT_OK) {
+				Log.d(TAG, "Udah balik lagi");
+			}
+		}
+		
+		if (resultCode == RESULT_CANCELED) {
+		}
 	}
 
 }

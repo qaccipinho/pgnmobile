@@ -45,6 +45,8 @@ public class MyIdentify extends AsyncTask<IdentifyParameters, Void, IdentifyResu
 		map = view;
 		myCallout = map.getCallout();
 		myCallout.setStyle(R.xml.callout_style_1);
+		
+		myLib = new MyLib();
 
 		prepareIdentifyLayer();
 	}
@@ -125,9 +127,9 @@ public class MyIdentify extends AsyncTask<IdentifyParameters, Void, IdentifyResu
 	}
 	
 	private void prepareIdentifyLayer() {
-		this.listIdentify = myContext.getString(R.string.list_layer_identify42).split(",");
-		this.listIdentifyId = myContext.getString(R.string.list_layer_identify_id42).split(",");
-		this.listIdentifyField = myContext.getString(R.string.list_layer_identify_field42).split(",");
+		this.listIdentify = myContext.getString(R.string.list_layer_identify).split(",");
+		this.listIdentifyId = myContext.getString(R.string.list_layer_identify_id).split(",");
+		this.listIdentifyField = myContext.getString(R.string.list_layer_identify_field).split(",");
 		
 		for (int i=0;i<this.listIdentifyId.length;i++) {
 			this.layerIdName.put(Integer.parseInt(this.listIdentifyId[i]), this.listIdentify[i]);
@@ -153,6 +155,7 @@ public class MyIdentify extends AsyncTask<IdentifyParameters, Void, IdentifyResu
 			iParams.setMapExtent(env);
 		}
 		catch(Exception ex) {
+			Log.d(TAG, "error di createIdentifyParameters");
 			ex.printStackTrace();
 		}
 
